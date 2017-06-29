@@ -7,9 +7,13 @@ pushd `dirname $0` >/dev/null
 SCRIPT_DIR=`pwd -P`
 popd > /dev/null
 
-pushd $SCRIPT_DIR/../.. > dev/null
-export OSSIM_DEV_HOME=`pwd -P`
-popd >/dev/null
+if [ -z $WORKSPACE ] ; then
+  pushd $SCRIPT_DIR/../.. > dev/null
+    export OSSIM_DEV_HOME=`pwd -P`
+  popd >/dev/null
+else
+  export OSSIM_DEV_HOME=$WORKSPACE
+fi
 
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/ossim-env.sh
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/functions.sh

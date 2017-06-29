@@ -1,10 +1,15 @@
+def notifyObj
 node {
    env.WORKSPACE=pwd()
    try{
      stage("Checkout"){
+         dir("ossim-ci"){
+            git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-ci.git'
+         }
          dir("ossim-rpm"){
             git branch: "${OSSIM_GIT_BRANCH}", url: 'https://github.com/ossimlabs/ossim-rpm.git'
          }
+       notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
      }
      echo "${env.WORKSPACE}"
      stage("Download Artifacts"){
