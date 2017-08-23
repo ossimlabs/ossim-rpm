@@ -245,14 +245,14 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 This sub-package contains the mrsid ossim plugin for reading/writing
 mrsid compressed data via the MrSID library.
 
-%package    opencv-plugin
-Summary:        OSSIM OpenCV plugin, contains registration code.
-Group:          System Environment/Libraries
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+#%package    opencv-plugin
+#Summary:        OSSIM OpenCV plugin, contains registration code.
+#Group:          System Environment/Libraries
+#Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
-%description    opencv-plugin
-This sub-package contains the ossim opencv plugin with various pieces of 
-image registration code.
+#%description    opencv-plugin
+#This sub-package contains the ossim opencv plugin with various pieces of 
+#image registration code.
 
 %package    openjpeg-plugin
 Summary:        OpenJPEG ossim plugin
