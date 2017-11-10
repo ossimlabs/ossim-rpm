@@ -307,6 +307,22 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 %description potrace-plugin
 This sub-package contains the potrace plugin. 
 
+%package    csm-plugin
+Summary:        CSM plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description csm-plugin
+This sub-package contains the CSM plugin. 
+
+%package    isa-plugin
+Summary:        ISA plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description isa-plugin
+This sub-package contains the ISA plugin. 
+
 %build
 echo "********************** $OSSIM_DEV_HOME ***********************"
 
@@ -615,6 +631,12 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files potrace-plugin
 %{_libdir}/ossim/plugins/libossim_potrace_plugin.so
+
+%files csm-plugin
+%{_libdir}/ossim/plugins/libossim_csm_plugin.so
+
+%files isa-plugin
+%{_libdir}/ossim/plugins/libossim_isa_plugin.so
 
 
 %changelog
