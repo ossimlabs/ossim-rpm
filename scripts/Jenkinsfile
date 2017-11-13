@@ -25,12 +25,12 @@ node {
           target: "${env.WORKSPACE}/oldmar-install"])
        step ([$class: 'CopyArtifact',
           projectName: "ossim-isa-plugin-${OSSIM_GIT_BRANCH}",
-          filter: "artifacts/ossim-isa-plugin-install.tgz",
+          filter: "ossim-isa-plugin-install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/ossim-isa-plugin-install"])
        step ([$class: 'CopyArtifact',
           projectName: "ossim-csm-plugin-${OSSIM_GIT_BRANCH}",
-          filter: "artifacts/ossim-csm-plugin-install.tgz",
+          filter: "ossim-csm-plugin-install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/ossim-csm-plugin-install"])
        step ([$class: 'CopyArtifact',
