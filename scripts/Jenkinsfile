@@ -42,7 +42,7 @@ node {
      stage("Build"){
       dir("${env.WORKSPACE}"){
         sh "tar xvfz dependency-rpms.tgz"
-        sh "ossim-rpm/scripts/linux/rpmbuild-binary.sh"
+        sh "ossim-rpm/scripts/rpmbuild-binary.sh"
       }
      }
      
