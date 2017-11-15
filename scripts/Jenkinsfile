@@ -20,7 +20,7 @@ node {
           target: "${env.WORKSPACE}/ossim-install"])
        step ([$class: 'CopyArtifact',
           projectName: "oldmar-${OSSIM_GIT_BRANCH}",
-          filter: "artifacts/install.tgz",
+          filter: "artifacts/ossim-install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/oldmar-install"])
        step ([$class: 'CopyArtifact',
@@ -42,8 +42,8 @@ node {
      stage("Build"){
       dir("${env.WORKSPACE}"){
         sh "tar xvfz dependency-rpms.tgz"
+        sh "ossim-rpm/scripts/linux/rpmbuild-binary.sh"
       }
-      sh "${env.WORKSPACE}/ossim-ci/scripts/linux/rpmbuild-binary.sh"
      }
      
      stage("Archive"){
