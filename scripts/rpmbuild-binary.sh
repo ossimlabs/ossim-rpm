@@ -70,7 +70,7 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   #
   pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
   rm -rf *
-  tar xvfz $OSSIM_DEV_HOME/ossim-install/install.tgz 
+  tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
   popd
 else
   echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD  does not exist"
