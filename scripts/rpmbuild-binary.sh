@@ -8,7 +8,7 @@ SCRIPT_DIR=`pwd -P`
 popd > /dev/null
 
 if [ -z $WORKSPACE ] ; then
-  pushd $SCRIPT_DIR/../.. > dev/null
+  pushd $SCRIPT_DIR/../.. > /dev/null
     export OSSIM_DEV_HOME=`pwd -P`
   popd >/dev/null
 else
