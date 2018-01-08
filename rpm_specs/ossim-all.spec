@@ -392,15 +392,17 @@ pushd %{_builddir}/install
 #    install -p -m644 -D ./etc/profile.d/ossim.csh %{buildroot}%{_sysconfdir}/profile.d/ossim.csh
   fi
 %if %{is_systemd}
-  for x in `find lib/systemd/system` ; do
-    if [ -f $x ] ; then
-      BASE_DIR=`dirname %{buildroot}/usr/$x`
-      mkdir -p $BASE_DIR
-      cp $x %{buildroot}/usr/$x 
-      chmod 755 %{buildroot}/usr/$x 
-#      install -p -m755 -D $x %{buildroot}/usr/$x;
-    fi
-  done
+  if [ -d lib/systemd/system ] ; then
+    for x in `find lib/systemd/system` ; do
+      if [ -f $x ] ; then
+        BASE_DIR=`dirname %{buildroot}/usr/$x`
+        mkdir -p $BASE_DIR
+        cp $x %{buildroot}/usr/$x 
+        chmod 755 %{buildroot}/usr/$x 
+  #      install -p -m755 -D $x %{buildroot}/usr/$x;
+      fi
+    done
+  fi
 %else
   for x in `find etc/init.d` ; do
     if [ -f $x ] ; then
