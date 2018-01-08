@@ -6,6 +6,7 @@ OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 pushd $(dirname ${BASH_SOURCE[0]}) > /dev/null
 SCRIPT_DIR=`pwd -P`
 
+
 popd > /dev/null
 
 if [ -z $WORKSPACE ] ; then
@@ -15,6 +16,10 @@ if [ -z $WORKSPACE ] ; then
 else
   export OSSIM_DEV_HOME=$WORKSPACE
 fi
+
+pushd $SCRIPT_DIR/../rpm_specs >/dev/null
+SPEC_DIR=$PWD
+popd > /dev/null
 
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/ossim-env.sh
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/functions.sh
@@ -37,7 +42,7 @@ if [ $? -ne 0 ]; then
 fi
 #fi
 
-cp $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
+cp $SPEC_DIR/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Unable to copy spec files from $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec to location $OSSIM_DEV_HOME/rpmbuild/SPECS."
   exit 1
