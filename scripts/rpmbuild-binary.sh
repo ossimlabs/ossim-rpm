@@ -77,6 +77,7 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
   rm -rf *
   tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
+  tar xvfz $OSSIM_DEV_HOME/ossim-csm-plugin-install/ossim-csm-plugin-install.tgz 
   popd
 else
   echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD  does not exist"
