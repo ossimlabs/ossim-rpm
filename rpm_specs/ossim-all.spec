@@ -540,6 +540,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %exclude %{_bindir}/ossim-src2src
 %exclude %{_bindir}/ossim-swapbytes
 %exclude %{_bindir}/ossim-ws-cmp
+%exclude %{_bindir}/ossim-mspsms
 
 # These are in the geocell package:
 %exclude %{_bindir}/ossim-geocell
@@ -557,6 +558,8 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files libs
 %{_datadir}/ossim/
+%exclude %{_datadir}/ossim/isa/*
+
 #%doc ossim/LICENSE.txt
 %{_libdir}/libossim.so*
 %{_libdir}/pkgconfig/ossim.pc
@@ -665,6 +668,6 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files isa-plugin
 %{_libdir}/ossim/plugins/libossim_isa_plugin.so
-
+%{_datadir}/ossim/isa/*
 
 %changelog
