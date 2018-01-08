@@ -334,19 +334,30 @@ export ROOT_DIR=$PWD
 popd > /dev/null
 
 export DESTDIR=%{buildroot}
+mkdir -p %{buildroot}/usr
 mkdir -p %{_bindir}
 mkdir -p %{_libdir}
 
 pushd %{_builddir}/install
-echo off
+#echo off
   for x in `find include`; do
     if [ -f $x ] ; then
-      install -p -m644 -D $x %{buildroot}/usr/$x;
+      echo "COPYING $x"
+      BASE_DIR=`dirname %{buildroot}/usr/$x`
+      mkdir -p $BASE_DIR
+      cp $x %{buildroot}/usr/$x 
+      chmod 644 %{buildroot}/usr/$x 
+
+#      install -p -m644 -D $x %{buildroot}/usr/$x;
     fi
   done
   for x in `find share`; do
     if [ -f $x ] ; then
-      install -p -m644 -D $x %{buildroot}/usr/$x;
+      BASE_DIR=`dirname %{buildroot}/usr/$x`
+      mkdir -p $BASE_DIR
+      cp $x %{buildroot}/usr/$x 
+      chmod 644 %{buildroot}/usr/$x 
+#      install -p -m644 -D $x %{buildroot}/usr/$x;
     fi
   done
 
@@ -368,22 +379,39 @@ echo off
 #  done
 
   if [ -f ./etc/profile.d/ossim.sh ] ; then
-    install -p -m644 -D ./etc/profile.d/ossim.sh %{buildroot}%{_sysconfdir}/profile.d/ossim.sh
+   mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
+   cp ./etc/profile.d/ossim.sh %{buildroot}%{_sysconfdir}/profile.d/ossim.sh
+   chmod 744 %{buildroot}%{_sysconfdir}/profile.d/ossim.sh
+#    install -p -m644 -D ./etc/profile.d/ossim.sh %{buildroot}%{_sysconfdir}/profile.d/ossim.sh
   fi
 
   if [ -f ./etc/profile.d/ossim.csh ] ; then
-    install -p -m644 -D ./etc/profile.d/ossim.csh %{buildroot}%{_sysconfdir}/profile.d/ossim.csh
+    mkdir -p %{buildroot}%{_sysconfdir}/profile.d
+    cp ./etc/profile.d/ossim.csh %{buildroot}%{_sysconfdir}/profile.d/ossim.csh
+    chmod 744 %{buildroot}%{_sysconfdir}/profile.d/ossim.csh
+#    install -p -m644 -D ./etc/profile.d/ossim.csh %{buildroot}%{_sysconfdir}/profile.d/ossim.csh
   fi
 %if %{is_systemd}
-  for x in `find lib/systemd/system` ; do
-    if [ -f $x ] ; then
-      install -p -m755 -D $x %{buildroot}/usr/$x;
-    fi
-  done
+  if [ -d lib/systemd/system ] ; then
+    for x in `find lib/systemd/system` ; do
+      if [ -f $x ] ; then
+        BASE_DIR=`dirname %{buildroot}/usr/$x`
+        mkdir -p $BASE_DIR
+        cp $x %{buildroot}/usr/$x 
+        chmod 755 %{buildroot}/usr/$x 
+  #      install -p -m755 -D $x %{buildroot}/usr/$x;
+      fi
+    done
+  fi
 %else
   for x in `find etc/init.d` ; do
     if [ -f $x ] ; then
-      install -p -m755 -D $x %{buildroot}/$x;
+      BASE_DIR=`dirname %{buildroot}/$x`
+      mkdir -p $BASE_DIR
+      cp $x %{buildroot}/$x 
+      chmod 755 %{buildroot}/$x 
+
+      #install -p -m755 -D $x %{buildroot}/$x;
     fi
   done
 %endif
@@ -512,6 +540,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %exclude %{_bindir}/ossim-src2src
 %exclude %{_bindir}/ossim-swapbytes
 %exclude %{_bindir}/ossim-ws-cmp
+%exclude %{_bindir}/ossim-mspsms
 
 # These are in the geocell package:
 %exclude %{_bindir}/ossim-geocell
@@ -529,6 +558,8 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files libs
 %{_datadir}/ossim/
+%exclude %{_datadir}/ossim/isa/*
+
 #%doc ossim/LICENSE.txt
 %{_libdir}/libossim.so*
 %{_libdir}/pkgconfig/ossim.pc
@@ -637,6 +668,6 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files isa-plugin
 %{_libdir}/ossim/plugins/libossim_isa_plugin.so
-
+%{_datadir}/ossim/isa/*
 
 %changelog

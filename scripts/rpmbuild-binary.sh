@@ -3,8 +3,10 @@
 GIT_BRANCH="dev"
 OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 ############################################################
-pushd `dirname $0` >/dev/null
+pushd $(dirname ${BASH_SOURCE[0]}) > /dev/null
 SCRIPT_DIR=`pwd -P`
+
+
 popd > /dev/null
 
 if [ -z $WORKSPACE ] ; then
@@ -14,6 +16,10 @@ if [ -z $WORKSPACE ] ; then
 else
   export OSSIM_DEV_HOME=$WORKSPACE
 fi
+
+pushd $SCRIPT_DIR/../rpm_specs >/dev/null
+SPEC_DIR=$PWD
+popd > /dev/null
 
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/ossim-env.sh
 source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/functions.sh
@@ -36,7 +42,7 @@ if [ $? -ne 0 ]; then
 fi
 #fi
 
-cp $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
+cp $SPEC_DIR/*.spec $OSSIM_DEV_HOME/rpmbuild/SPECS/
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Unable to copy spec files from $OSSIM_DEV_HOME/ossim-ci/rpm_specs/*.spec to location $OSSIM_DEV_HOME/rpmbuild/SPECS."
   exit 1
@@ -71,6 +77,11 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
   rm -rf *
   tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
+  tar xvfz $OSSIM_DEV_HOME/ossim-csm-plugin-install/ossim-csm-plugin-install.tgz 
+  pushd install
+    tar xvfz $OSSIM_DEV_HOME/ossim-isa-plugin-install/ossim-isa-plugin-install.tgz
+    rm -rf install/bin/ossim-mspsms
+  popd
   popd
 else
   echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD  does not exist"
@@ -87,24 +98,23 @@ if [ $? -ne 0 ]; then
 fi
 
 
-if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
+#if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   # Setup the oldmar for packaging
   #
-  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
-    rm -rf *
-    tar xvfz $OSSIM_DEV_HOME/oldmar-install/install.tgz 
-  popd
-else
-  echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
-fi
+#  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
+#    rm -rf *
+#    tar xvfz $OSSIM_DEV_HOME/oldmar-install/install.tgz 
+#  popd
+#else
+#  echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
+#fi
 
-echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
+#echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
-rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
+#rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Build failed for OLDMAR rpm binary build."
-  popd >/dev/null
   exit 1
 fi
 
