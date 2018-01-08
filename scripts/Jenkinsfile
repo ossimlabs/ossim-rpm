@@ -63,6 +63,6 @@ node {
     currentBuild.result = "FAILED"
   }
   stage("Clean Workspace"){
-    //step([$class: 'WsCleanup'])
+    step([$class: 'WsCleanup'])
   }
 }
