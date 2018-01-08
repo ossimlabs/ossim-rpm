@@ -339,13 +339,15 @@ mkdir -p %{_bindir}
 mkdir -p %{_libdir}
 
 pushd %{_builddir}/install
-echo off
+#echo off
   for x in `find include`; do
     if [ -f $x ] ; then
+      echo "COPYING $x"
       BASE_DIR=`dirname %{buildroot}/usr/$x`
       mkdir -p $BASE_DIR
       cp $x %{buildroot}/usr/$x 
       chmod 644 %{buildroot}/usr/$x 
+
 #      install -p -m644 -D $x %{buildroot}/usr/$x;
     fi
   done
