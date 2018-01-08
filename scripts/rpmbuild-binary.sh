@@ -79,7 +79,7 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
   tar xvfz $OSSIM_DEV_HOME/ossim-csm-plugin-install/ossim-csm-plugin-install.tgz 
   pushd install
-    tar xvfz $OSSIM_DEV_HOME/ossim-isa-plugin-install/ossim-isa-plugin-install.tgz
+    tar xvfz $OSSIM_DEV_HOME/ossim-isa-plugin-install/ossim-isa-plugin-install.tgzg
   popd
   popd
 else
@@ -110,11 +110,10 @@ fi
 
 echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
-rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
+#rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
 if [ $? -ne 0 ]; then
   echo; echo "ERROR: Build failed for OLDMAR rpm binary build."
-  popd >/dev/null
   exit 1
 fi
 
