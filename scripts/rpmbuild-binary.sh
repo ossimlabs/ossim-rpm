@@ -6,7 +6,6 @@ OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 pushd $(dirname ${BASH_SOURCE[0]}) > /dev/null
 SCRIPT_DIR=`pwd -P`
 
-export PATH=$SCRIPT_DIR:$PATH
 popd > /dev/null
 
 if [ -z $WORKSPACE ] ; then
