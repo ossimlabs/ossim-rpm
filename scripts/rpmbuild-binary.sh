@@ -97,18 +97,18 @@ if [ $? -ne 0 ]; then
 fi
 
 
-if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
+#if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   # Setup the oldmar for packaging
   #
-  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
-    rm -rf *
-    tar xvfz $OSSIM_DEV_HOME/oldmar-install/install.tgz 
-  popd
-else
-  echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
-fi
+#  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
+#    rm -rf *
+#    tar xvfz $OSSIM_DEV_HOME/oldmar-install/install.tgz 
+#  popd
+#else
+#  echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD does not exist"
+#fi
 
-echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
+#echo rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
 #rpmbuild -ba --define "_topdir ${OSSIM_DEV_HOME}/rpmbuild" --define "RPM_OSSIM_VERSION ${OSSIM_VERSION}" --define "BUILD_RELEASE ${OSSIM_BUILD_RELEASE}" ${OSSIM_DEV_HOME}/rpmbuild/SPECS/oldmar-all.spec
 
