@@ -315,13 +315,21 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 %description csm-plugin
 This sub-package contains the CSM plugin. 
 
-%package    isa-plugin
-Summary:        ISA plugin
+%package    atp-plugin
+Summary:        ATP plugin
 Group:          System Environment/Libraries
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
-%description isa-plugin
-This sub-package contains the ISA plugin. 
+%description atp-plugin
+This sub-package contains the ATP plugin. 
+
+%package    msp-plugin
+Summary:        MSP plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description msp-plugin
+This sub-package contains the MSP plugin. 
 
 %build
 echo "********************** $OSSIM_DEV_HOME ***********************"
