@@ -679,6 +679,6 @@ rm -rf /usr/share/ossim/${APP_NAME}
 
 %files atp-plugin
 %{_libdir}/ossim/plugins/libossim_atp_plugin.so
-%{_datadir}/ossim/isa/*
+%{_datadir}/ossim/atp/*
 
 %changelog
