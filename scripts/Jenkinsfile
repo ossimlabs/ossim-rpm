@@ -29,10 +29,10 @@ node {
           flatten: true,
           target: "${env.WORKSPACE}/oldmar-install"])
        step ([$class: 'CopyArtifact',
-          projectName: "ossim-isa-plugin-${OSSIM_GIT_BRANCH}",
-          filter: "ossim-isa-plugin-install.tgz",
+          projectName: "ossim-msp-plugin-${OSSIM_GIT_BRANCH}",
+          filter: "ossim-msp-plugin-install.tgz",
           flatten: true,
-          target: "${env.WORKSPACE}/ossim-isa-plugin-install"])
+          target: "${env.WORKSPACE}/ossim-msp-plugin-install"])
        step ([$class: 'CopyArtifact',
           projectName: "ossim-csm-plugin-${OSSIM_GIT_BRANCH}",
           filter: "ossim-csm-plugin-install.tgz",
