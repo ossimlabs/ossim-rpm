@@ -23,11 +23,11 @@ node {
           filter: "artifacts/ossim-install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/ossim-install"])
-       step ([$class: 'CopyArtifact',
-          projectName: "oldmar-${OSSIM_GIT_BRANCH}",
-          filter: "artifacts/install.tgz",
-          flatten: true,
-          target: "${env.WORKSPACE}/oldmar-install"])
+       //step ([$class: 'CopyArtifact',
+       //   projectName: "oldmar-${OSSIM_GIT_BRANCH}",
+       //   filter: "artifacts/install.tgz",
+       //   flatten: true,
+       //   target: "${env.WORKSPACE}/oldmar-install"])
        step ([$class: 'CopyArtifact',
           projectName: "ossim-msp-plugin-${OSSIM_GIT_BRANCH}",
           filter: "ossim-msp-plugin-install.tgz",
@@ -57,12 +57,12 @@ node {
        }
        archiveArtifacts 'artifacts/*'
     }
-    stage("Clean Workspace"){
-      step([$class: 'WsCleanup'])
-    }
   }
   catch(e)
   {
     currentBuild.result = "FAILED"
+  }
+  stage("Clean Workspace"){
+    //step([$class: 'WsCleanup'])
   }
 }
