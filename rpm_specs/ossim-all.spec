@@ -674,8 +674,8 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %files csm-plugin
 %{_libdir}/ossim/plugins/libossim_csm_plugin.so
 
-%files msp-plugin
-%{_libdir}/ossim/plugins/libossim_msp_plugin.so
+#%files msp-plugin
+#%{_libdir}/ossim/plugins/libossim_msp_plugin.so
 
 %files atp-plugin
 %{_libdir}/ossim/plugins/libossim_atp_plugin.so
