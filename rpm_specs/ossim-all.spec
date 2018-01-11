@@ -549,6 +549,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %exclude %{_bindir}/ossim-swapbytes
 %exclude %{_bindir}/ossim-ws-cmp
 %exclude %{_bindir}/ossim-mspsms
+%exclude %{_bindir}/msp-foo
 
 # These are in the geocell package:
 %exclude %{_bindir}/ossim-geocell
