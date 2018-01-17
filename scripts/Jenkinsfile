@@ -23,11 +23,11 @@ node {
           filter: "artifacts/ossim-install.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/ossim-install"])
-       //step ([$class: 'CopyArtifact',
-       //   projectName: "oldmar-${OSSIM_GIT_BRANCH}",
-       //   filter: "artifacts/install.tgz",
-       //   flatten: true,
-       //   target: "${env.WORKSPACE}/oldmar-install"])
+       step ([$class: 'CopyArtifact',
+          projectName: "opencv-build",
+          filter: "artifacts/opencv-3.2-minimal-install.tgz",
+          flatten: true,
+          target: "${env.WORKSPACE}/opencv-3.2-minimal-install"])
        step ([$class: 'CopyArtifact',
           projectName: "ossim-csm-plugin-${OSSIM_GIT_BRANCH}",
           filter: "ossim-csm-plugin-install.tgz",

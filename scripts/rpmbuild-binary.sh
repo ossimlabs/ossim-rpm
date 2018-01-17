@@ -77,6 +77,7 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
   rm -rf *
   tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
+  tar xvfz $OSSIM_DEV_HOME/opencv-3.2-minimal-install/opencv-3.2-minimal-install.tgz 
   tar xvfz $OSSIM_DEV_HOME/ossim-csm-plugin-install/ossim-csm-plugin-install.tgz 
   #pushd install
   #  tar xvfz $OSSIM_DEV_HOME/ossim-msp-plugin-install/ossim-msp-plugin-install.tgz
