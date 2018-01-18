@@ -25,7 +25,7 @@ node {
           target: "${env.WORKSPACE}/ossim-install"])
        step ([$class: 'CopyArtifact',
           projectName: "opencv-build",
-          filter: "artifacts/opencv-3.2-minimal-install.tgz",
+          filter: "*.tgz",
           flatten: true,
           target: "${env.WORKSPACE}/opencv-3.2-minimal-install"])
        step ([$class: 'CopyArtifact',
