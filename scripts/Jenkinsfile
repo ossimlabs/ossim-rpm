@@ -1,6 +1,7 @@
 def notifyObj
 node {
    env.WORKSPACE=pwd()
+   env.OPENCV_HOME="${env.WORKSPACE}/opencv-3.2-minimal-install"
    try{
      stage("Checkout"){
          dir("ossim-rpm"){
