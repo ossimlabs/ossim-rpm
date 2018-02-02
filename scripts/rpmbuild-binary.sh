@@ -3,7 +3,7 @@
 GIT_BRANCH="dev"
 OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 ############################################################
-pushd $(dirname ${BASH_SOURCE[0]}) > /dev/null
+pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 SCRIPT_DIR=`pwd -P`
 
 
@@ -77,11 +77,12 @@ if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
   rm -rf *
   tar xvfz $OSSIM_DEV_HOME/ossim-install/ossim-install.tgz 
+  tar xvfz $OSSIM_DEV_HOME/opencv-3.2-minimal-install/opencv-3.2-minimal-install.tgz 
   tar xvfz $OSSIM_DEV_HOME/ossim-csm-plugin-install/ossim-csm-plugin-install.tgz 
-  pushd install
-    tar xvfz $OSSIM_DEV_HOME/ossim-isa-plugin-install/ossim-isa-plugin-install.tgz
-    rm -rf install/bin/ossim-mspsms
-  popd
+  #pushd install
+  #  tar xvfz $OSSIM_DEV_HOME/ossim-msp-plugin-install/ossim-msp-plugin-install.tgz
+  #  rm -rf install/bin/ossim-mspsms
+  #popd
   popd
 else
   echo "ERROR: Directory $OSSIM_DEV_HOME/rpmbuild/BUILD  does not exist"
@@ -98,10 +99,10 @@ if [ $? -ne 0 ]; then
 fi
 
 
-#if [ -d $OSSIM_DEV_HOME/rpmbuild/BUILD ] ; then
   # Setup the oldmar for packaging
   #
-#  pushd $OSSIM_DEV_HOME/rpmbuild/BUILD/
+
+
 #    rm -rf *
 #    tar xvfz $OSSIM_DEV_HOME/oldmar-install/install.tgz 
 #  popd

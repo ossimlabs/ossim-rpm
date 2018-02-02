@@ -245,15 +245,6 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 This sub-package contains the mrsid ossim plugin for reading/writing
 mrsid compressed data via the MrSID library.
 
-#%package    opencv-plugin
-#Summary:        OSSIM OpenCV plugin, contains registration code.
-#Group:          System Environment/Libraries
-#Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
-
-#%description    opencv-plugin
-#This sub-package contains the ossim opencv plugin with various pieces of 
-#image registration code.
-
 %package    openjpeg-plugin
 Summary:        OpenJPEG ossim plugin
 Group:          System Environment/Libraries
@@ -315,13 +306,21 @@ Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 %description csm-plugin
 This sub-package contains the CSM plugin. 
 
-%package    isa-plugin
-Summary:        ISA plugin
+%package    atp-plugin
+Summary:        ATP plugin
 Group:          System Environment/Libraries
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 
-%description isa-plugin
-This sub-package contains the ISA plugin. 
+%description atp-plugin
+This sub-package contains the ATP plugin. 
+
+%package    msp-plugin
+Summary:        MSP plugin
+Group:          System Environment/Libraries
+Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description msp-plugin
+This sub-package contains the MSP plugin. 
 
 %build
 echo "********************** $OSSIM_DEV_HOME ***********************"
@@ -393,15 +392,15 @@ pushd %{_builddir}/install
   fi
 %if %{is_systemd}
   if [ -d lib/systemd/system ] ; then
-    for x in `find lib/systemd/system` ; do
-      if [ -f $x ] ; then
+  for x in `find lib/systemd/system` ; do
+    if [ -f $x ] ; then
         BASE_DIR=`dirname %{buildroot}/usr/$x`
         mkdir -p $BASE_DIR
         cp $x %{buildroot}/usr/$x 
         chmod 755 %{buildroot}/usr/$x 
   #      install -p -m755 -D $x %{buildroot}/usr/$x;
-      fi
-    done
+    fi
+  done
   fi
 %else
   for x in `find etc/init.d` ; do
@@ -541,6 +540,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %exclude %{_bindir}/ossim-swapbytes
 %exclude %{_bindir}/ossim-ws-cmp
 %exclude %{_bindir}/ossim-mspsms
+%exclude %{_bindir}/msp-foo
 
 # These are in the geocell package:
 %exclude %{_bindir}/ossim-geocell
@@ -642,9 +642,6 @@ rm -rf /usr/share/ossim/${APP_NAME}
 #%{_libdir}/liblti_lidar_dsdk.so
 #%{_libdir}/libltidsdk.so
 
-#%files opencv-plugin
-#%{_libdir}/ossim/plugins/libossim_opencv_plugin.so
-
 %files openjpeg-plugin
 %{_libdir}/ossim/plugins/libossim_openjpeg_plugin.so
 
@@ -666,8 +663,11 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %files csm-plugin
 %{_libdir}/ossim/plugins/libossim_csm_plugin.so
 
-%files isa-plugin
-%{_libdir}/ossim/plugins/libossim_isa_plugin.so
-%{_datadir}/ossim/isa/*
+#%files msp-plugin
+#%{_libdir}/ossim/plugins/libossim_msp_plugin.so
+
+%files atp-plugin
+%{_libdir}/ossim/plugins/libossim_atp_plugin.so
+%{_datadir}/ossim/atp/*
 
 %changelog
