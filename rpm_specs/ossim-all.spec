@@ -559,6 +559,7 @@ rm -rf /usr/share/ossim/${APP_NAME}
 %files libs
 %{_datadir}/ossim/
 %exclude %{_datadir}/ossim/isa/*
+%exclude %{_datadir}/ossim/atp/*
 
 #%doc ossim/LICENSE.txt
 %{_libdir}/libossim.so*
