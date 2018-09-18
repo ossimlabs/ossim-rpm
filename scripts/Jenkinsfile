@@ -9,16 +9,7 @@ node("ossim-build") {
          }
      }
      echo "${env.WORKSPACE}"
-     stage("Download Artifacts"){
-     
-       // Is this really needed? Doesn't seem used but was being checked out.
-       step ([$class: "CopyArtifact",
-             projectName: "ossim-ci-${OSSIM_GIT_BRANCH}",
-             filter: "ossim-ci-${OSSIM_GIT_BRANCH}.tgz",
-             flatten: true])
-       sh "tar xvfz ossim-ci-${OSSIM_GIT_BRANCH}.tgz"
-       notifyObj = load "${env.WORKSPACE}/ossim-ci/jenkins/pipeline/notify.groovy"
-       
+     stage("Download Artifacts"){ 
        step ([$class: 'CopyArtifact',
           projectName: "ossim-${OSSIM_GIT_BRANCH}",
           filter: "artifacts/ossim-install.tgz",
@@ -46,7 +37,7 @@ node("ossim-build") {
         sh "ossim-rpm/scripts/rpmbuild-binary.sh"
       }
      }
-     
+
      stage("Archive"){
        dir("${env.WORKSPACE}/artifacts"){
            sh "mv ${env.WORKSPACE}/rpms.tgz ."
