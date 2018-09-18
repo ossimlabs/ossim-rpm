@@ -21,8 +21,8 @@ pushd $SCRIPT_DIR/../rpm_specs >/dev/null
 SPEC_DIR=$PWD
 popd > /dev/null
 
-source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/ossim-env.sh
-source $OSSIM_DEV_HOME/ossim-ci/scripts/linux/functions.sh
+source $OSSIM_DEV_HOME/ossim-ci/scripts/ossim-env.sh
+source $OSSIM_DEV_HOME/ossim-ci/scripts/functions.sh
 
 if [ "$OSSIM_GIT_BRANCH" != "" ] ; then
   GIT_BRANCH=$OSSIM_GIT_BRANCH
