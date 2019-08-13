@@ -6,14 +6,6 @@ OSSIM_SPEC=`uname -r | grep -o el[0-9]`
 pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 SCRIPT_DIR=`pwd -P`
 
-if [ "${RPM_OSSIM_VERSION}" = "" ] ; then
-   export RPM_OSSIM_VERSION="1.9.0"
-fi
-
-if [ "${BUILD_RELEASE}" = "" ] ; then
-   export BUILD_RELEASE="1"
-fi
-
 popd > /dev/null
 
 if [ -z $WORKSPACE ] ; then
